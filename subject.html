@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Papers</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h2 id="title"></h2>
+
+  <!-- Mid Semester FIRST -->
+
+  <h3>Mid Semester Papers (GEC SIWAN)</h3>
+  <ul id="midPapers"></ul>
+
+  <!-- End Semester BELOW -->
+
+  <h3>End Semester Papers (BEU)</h3>
+  <ul id="endPapers"></ul>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const branch = params.get("branch");
+    const sem = params.get("sem");
+    const sub = params.get("sub");
+
+    // Title
+    document.getElementById("title").innerText =
+      `${branch.toUpperCase()} - Sem ${sem} - ${sub}`;
+
+    // 🔹 Convert subject name to folder name
+    function formatSubject(sub) {
+      return sub.replace(/\s+/g, "");
+    }
+
+    const subjectFolder = formatSubject(sub);
+
+    // 🔹 Base path for PDFs
+    const basePath = `pdfs/${branch}/sem${sem}/${subjectFolder}/`;
+
+    // 🔹 Papers data
+    const midPapers = [
+      { year: 2025, file: basePath + "mid_2025.pdf" },
+      { year: 2024, file: basePath + "mid_2024.pdf" },
+      { year: 2023, file: basePath + "mid_2023.pdf" }
+    ];
+
+    const endPapers = [
+      { year: 2025, file: basePath + "end_2025.pdf" },
+      { year: 2024, file: basePath + "end_2024.pdf" },
+      { year: 2023, file: basePath + "end_2023.pdf" }
+    ];
+
+    // 🔹 Function to display papers
+    function displayPapers(data, elementId) {
+      const list = document.getElementById(elementId);
+
+      data.forEach(p => {
+        const li = document.createElement("li");
+
+        li.innerHTML = `
+          <a href="${p.file}" target="_blank" onclick="checkFile(event, '${p.file}')">
+            Download ${p.year} Paper
+          </a>
+        `;
+
+        list.appendChild(li);
+      });
+    }
+
+    // 🔹 Check if file exists
+    function checkFile(event, filePath) {
+      fetch(filePath)
+        .then(res => {
+          if (!res.ok) {
+            event.preventDefault();
+            alert("Paper not available yet.");
+          }
+        })
+        .catch(() => {
+          event.preventDefault();
+          alert("Paper not available yet.");
+        });
+    }
+
+    // 🔹 Display in correct order
+    displayPapers(midPapers, "midPapers");
+    displayPapers(endPapers, "endPapers");
+
+  </script>
+
+</body>
+</html>
