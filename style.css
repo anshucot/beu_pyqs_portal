@@ -1,98 +1,215 @@
-/* Basic Reset */
+/* ===============================
+   BASIC RESET
+   Sab browsers ka default margin/padding remove karte hain
+================================ */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  box-sizing: border-box; /* width + padding properly handle hota hai */
+  font-family: Arial, sans-serif; /* simple readable font */
 }
 
-/* Body */
+/* ===============================
+   FULL PAGE HEIGHT
+   Page ko full screen height dene ke liye
+================================ */
+html, body {
+  height: 100%;
+}
+
+/* ===============================
+   BODY LAYOUT
+   Flex use kiya hai taki footer always bottom me rahe
+================================ */
 body {
-  background: #f5f7fa;
-  min-height: 100vh;
-  position: relative;
+  background: #f5f7fa; /* light background */
+  display: flex;
+  flex-direction: column; /* elements vertical line me */
 }
 
-/* Watermark Logo */
+/* ===============================
+   WATERMARK LOGO
+   Background me logo show karne ke liye
+================================ */
 body::before {
   content: "";
-  position: fixed;
-  top: 60%; /* little down */
+  position: fixed; /* screen pe fix rahe */
+  top: 60%; /* thoda neeche */
   left: 50%;
   width: 400px;
   height: 400px;
   background: url("logo.png") no-repeat center;
   background-size: contain;
-  opacity: 0.1;
+  opacity: 0.25; /* halka visible */
+  filter: blur(1px); /* smooth effect */
   transform: translate(-50%, -50%);
-  z-index: 0;
+  z-index: 0; /* sabse neeche */
 }
 
-/* Keep content above watermark */
-body * {
+/* ===============================
+   CONTENT KO WATERMARK KE UPAR RAKHNA
+================================ */
+body > * {
   position: relative;
   z-index: 1;
 }
 
-/* Headings */
-h1, h2 {
-  text-align: center;
+/* ===============================
+   HEADINGS
+================================ */
+h1 {
+  text-align: center; /* center align */
   margin: 20px;
+  font-size: 28px;
+  font-weight: 600;
 }
 
-/* Grid Container */
+h2 {
+  text-align: center;
+  margin: 15px;
+}
+
+/* ===============================
+   MAIN CONTAINER (CARDS GRID)
+================================ */
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  /* auto-fit = screen ke hisaab se adjust */
+  
+  gap: 20px; /* cards ke beech gap */
   padding: 20px;
+
+  flex: 1; 
+  /* IMPORTANT:
+     ye container ko grow karta hai
+     jisse footer automatically neeche push hota hai */
 }
 
-/* Cards */
+/* ===============================
+   CARD DESIGN
+================================ */
 .card {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
+
+  height: 110px;
   background: white;
-  border-radius: 10px;
+  border-radius: 12px;
+
   text-decoration: none;
   color: black;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: 0.3s;
+
+  font-weight: 500;
+  letter-spacing: 0.5px;
+
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+
+  transition: 0.3s; /* smooth hover effect */
 }
 
-/* Hover Effect */
+/* ===============================
+   CARD HOVER EFFECT
+================================ */
 .card:hover {
-  background: #007BFF;
+  background: linear-gradient(135deg, #007BFF, #00c6ff);
   color: white;
+  transform: translateY(-6px); /* thoda upar uthta hai */
 }
 
-/* List */
+/* ===============================
+   LIST (PDF LINKS PAGE)
+================================ */
 ul {
   max-width: 500px;
   margin: 20px auto;
 }
 
-/* List Items */
 li {
-  list-style: none;
+  list-style: none; /* bullet remove */
   margin: 10px 0;
 }
 
-/* Links */
+/* link box */
 li a {
   display: block;
   padding: 10px;
   background: white;
-  border-radius: 5px;
+  border-radius: 6px;
   text-decoration: none;
   color: #007BFF;
   border: 1px solid #ddd;
+  transition: 0.3s;
 }
 
-/* Hover Links */
+/* hover effect */
 li a:hover {
   background: #007BFF;
   color: white;
+}
+
+/* ===============================
+   FOOTER SECTION
+================================ */
+.footer {
+  background: linear-gradient(135deg, #1f1f1f, #2f2f2f);
+  /* dark gradient look */
+
+  color: #ccc;
+
+  padding: 25px 20px 10px; /* compact size */
+  margin-top: 60px; /* upar space taki logo dikhe */
+
+  border-top: 2px solid #007BFF;
+
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  /* curved top design */
+
+  box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
+}
+
+/* footer ke andar 3 columns */
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+/* headings */
+.footer-box h3 {
+  color: white;
+  margin-bottom: 8px;
+}
+
+/* text */
+.footer-box p {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* bottom copyright */
+.footer-bottom {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 12px;
+  color: #aaa;
+
+  border-top: 1px solid #444;
+  padding-top: 10px;
+}
+
+/* ===============================
+   MOBILE RESPONSIVE
+================================ */
+@media (max-width: 600px) {
+  .card {
+    height: 90px;
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
 }
