@@ -7,53 +7,85 @@
 </head>
 <body>
 
-  <h1>Bihar Engineering University (PYQs)</h1>
+<header>
+  <img src="logo.png" class="logo">
+  <h1>BEU PYQs Portal</h1>
+  <p>Previous Year Question Papers for B.Tech</p>
+  <button onclick="toggleMode()">🌙</button>
+</header>
 
-  <div class="container">
-    <a href="branch.html?branch=cse" class="card"><span>CSE</span></a>
-    <a href="branch.html?branch=cse-iot" class="card"><span>CSE IoT</span></a>
-    <a href="branch.html?branch=ee" class="card"><span>Electrical Engineering</span></a>
-    <a href="branch.html?branch=ce" class="card"><span>Civil Engineering</span></a>
-    <a href="branch.html?branch=me" class="card"><span>Mechanical Engineering</span></a>
-    <a href="branch.html?branch=vlsi" class="card"><span>Electronics VLSI</span></a>
-  </div>
+<input type="text" id="searchBox" placeholder="Search branch...">
 
-  <footer class="footer">
+<div class="stats">
+  <div>120+ Papers</div>
+  <div>6 Branches</div>
+  <div>50+ Subjects</div>
+</div>
 
-    <div class="footer-container">
+<div class="container" id="branchContainer">
+  <a href="branch.html?branch=cse" class="card"><span>💻 CSE</span></a>
+  <a href="branch.html?branch=cse-iot" class="card"><span>📡 CSE IoT</span></a>
+  <a href="branch.html?branch=ee" class="card"><span>⚡ EE</span></a>
+  <a href="branch.html?branch=ce" class="card"><span>🏗️ CE</span></a>
+  <a href="branch.html?branch=me" class="card"><span>⚙️ ME</span></a>
+  <a href="branch.html?branch=vlsi" class="card"><span>📘 VLSI</span></a>
+</div>
 
-      <!-- About -->
-      <div class="footer-box">
-        <h3>ABOUT GROUP</h3>
-        <p>Designed to provide Question Papers, Solutions & Notes</p>
-      </div> <!-- ✅ FIXED -->
+<footer class="footer">
+  <div class="footer-container">
 
-      <!-- Disclaimer -->
-      <div class="footer-box">
-        <h3>DISCLAIMER</h3>
-        <p>
-          We try to provide accurate and timely content, but we do not guarantee
-          completeness or correctness. If any copyrighted material is used,
-          please contact us and we will remove it.
-        </p>
-      </div>
-
-      <!-- Contact -->
-      <div class="footer-box">
-        <h3>CONTACT INFO</h3>
-        <p>PYQ Portal</p>
-        <p>Bihar, India</p>
-        <p>Email: anshuciot@gmail.com</p>
-        <p>Phone: +91 9525056552</p>
-      </div>
-
+    <div class="footer-box">
+      <h3>ABOUT GROUP</h3>
+      <p>Designed to provide Question Papers, Solutions & Notes</p>
     </div>
 
-    <p class="footer-bottom">
-      © 2026 BEU PYQs | All Rights Reserved
-    </p>
+    <div class="footer-box">
+      <h3>DISCLAIMER</h3>
+      <p>
+        We strive continuously to provide as precisely and as timely contents as possible, however, we do not guarantee the accuracy, completeness, correctness, timeliness, validity or fitness of the contents of this website.
+      </p>
+    </div>
 
-  </footer>
+    <div class="footer-box">
+      <h3>CONTACT INFO</h3>
+      <p>PYQ Online</p>
+      <p>📧Siwan,Bihar</p>
+      <p>🌐Email id: anshuciot@gmail.com</p>
+      <p>📞Phone: 9525056552</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Anshu | All Rights Reserved</p>
+  </div>
+
+  <button onclick="scrollToTop()" id="topBtn">Top</button>
+</footer>
+
+<script>
+function toggleMode() {
+  document.body.classList.toggle("dark");
+}
+
+// Search filter
+document.getElementById("searchBox").addEventListener("keyup", function() {
+  let filter = this.value.toLowerCase();
+  let cards = document.querySelectorAll(".card");
+
+  cards.forEach(card => {
+    let text = card.innerText.toLowerCase();
+    card.style.display = text.includes(filter) ? "flex" : "none";
+  });
+});
+
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+</script>
 
 </body>
 </html>

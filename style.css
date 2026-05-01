@@ -1,215 +1,308 @@
 /* ===============================
-   BASIC RESET
-   Sab browsers ka default margin/padding remove karte hain
+   ROOT VARIABLES (DEFAULT = DARK)
+================================ */
+:root {
+  --bg: #0b0e1a;
+  --bg2: #111827;
+  --card-bg: rgba(255,255,255,0.05);
+  --border: rgba(255,255,255,0.1);
+
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+
+  --accent: #00d4ff;
+  --accent2: #7c3aed;
+}
+
+/* ===============================
+   LIGHT MODE
+================================ */
+body.light {
+  --bg: #f0f4ff;
+  --bg2: #e8edf8;
+  --card-bg: rgba(255,255,255,0.85);
+  --border: rgba(0,0,0,0.1);
+
+  --text: #1e293b;
+  --muted: #64748b;
+}
+
+/* ===============================
+   RESET
 ================================ */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* width + padding properly handle hota hai */
-  font-family: Arial, sans-serif; /* simple readable font */
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 /* ===============================
-   FULL PAGE HEIGHT
-   Page ko full screen height dene ke liye
-================================ */
-html, body {
-  height: 100%;
-}
-
-/* ===============================
-   BODY LAYOUT
-   Flex use kiya hai taki footer always bottom me rahe
+   BODY
 ================================ */
 body {
-  background: #f5f7fa; /* light background */
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+
   display: flex;
-  flex-direction: column; /* elements vertical line me */
+  flex-direction: column;
+
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* ===============================
-   WATERMARK LOGO
-   Background me logo show karne ke liye
+   HEADER
 ================================ */
-body::before {
-  content: "";
-  position: fixed; /* screen pe fix rahe */
-  top: 60%; /* thoda neeche */
-  left: 50%;
-  width: 400px;
-  height: 400px;
-  background: url("logo.png") no-repeat center;
-  background-size: contain;
-  opacity: 0.25; /* halka visible */
-  filter: blur(1px); /* smooth effect */
-  transform: translate(-50%, -50%);
-  z-index: 0; /* sabse neeche */
-}
-
-/* ===============================
-   CONTENT KO WATERMARK KE UPAR RAKHNA
-================================ */
-body > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* ===============================
-   HEADINGS
-================================ */
-h1 {
-  text-align: center; /* center align */
-  margin: 20px;
-  font-size: 28px;
-  font-weight: 600;
-}
-
-h2 {
+header {
   text-align: center;
-  margin: 15px;
+  padding: 20px;
+}
+
+header h1,
+header h2 {
+  margin-bottom: 10px;
 }
 
 /* ===============================
-   MAIN CONTAINER (CARDS GRID)
+   BUTTON
+================================ */
+button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* ===============================
+   CONTAINER GRID
 ================================ */
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  /* auto-fit = screen ke hisaab se adjust */
-  
-  gap: 20px; /* cards ke beech gap */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
   padding: 20px;
-
-  flex: 1; 
-  /* IMPORTANT:
-     ye container ko grow karta hai
-     jisse footer automatically neeche push hota hai */
 }
 
 /* ===============================
-   CARD DESIGN
+   CARD DESIGN (GLASS + GLOW)
 ================================ */
 .card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 110px;
-  background: white;
-  border-radius: 12px;
-
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
   text-decoration: none;
-  color: black;
+  color: var(--text);
 
-  font-weight: 500;
-  letter-spacing: 0.5px;
-
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-
-  transition: 0.3s; /* smooth hover effect */
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
 }
 
-/* ===============================
-   CARD HOVER EFFECT
-================================ */
+/* Hover effect */
 .card:hover {
-  background: linear-gradient(135deg, #007BFF, #00c6ff);
-  color: white;
-  transform: translateY(-6px); /* thoda upar uthta hai */
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
 }
 
 /* ===============================
-   LIST (PDF LINKS PAGE)
+   PAPER LIST
 ================================ */
 ul {
-  max-width: 500px;
+  max-width: 600px;
   margin: 20px auto;
+  padding: 0;
 }
 
 li {
-  list-style: none; /* bullet remove */
+  list-style: none;
   margin: 10px 0;
 }
 
-/* link box */
 li a {
   display: block;
-  padding: 10px;
-  background: white;
-  border-radius: 6px;
+  padding: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
   text-decoration: none;
-  color: #007BFF;
-  border: 1px solid #ddd;
-  transition: 0.3s;
+  color: var(--accent);
+  transition: all 0.3s ease;
 }
 
-/* hover effect */
 li a:hover {
-  background: #007BFF;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
   color: white;
 }
 
 /* ===============================
-   FOOTER SECTION
+   FILE INPUT
 ================================ */
-.footer {
-  background: linear-gradient(135deg, #1f1f1f, #2f2f2f);
-  /* dark gradient look */
-
-  color: #ccc;
-
-  padding: 25px 20px 10px; /* compact size */
-  margin-top: 60px; /* upar space taki logo dikhe */
-
-  border-top: 2px solid #007BFF;
-
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
-  /* curved top design */
-
-  box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
-}
-
-/* footer ke andar 3 columns */
-.footer-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-}
-
-/* headings */
-.footer-box h3 {
-  color: white;
-  margin-bottom: 8px;
-}
-
-/* text */
-.footer-box p {
-  font-size: 13px;
-  line-height: 1.4;
-}
-
-/* bottom copyright */
-.footer-bottom {
-  text-align: center;
-  margin-top: 15px;
-  font-size: 12px;
-  color: #aaa;
-
-  border-top: 1px solid #444;
-  padding-top: 10px;
+input[type="file"] {
+  display: block;
+  margin: 15px auto;
+  color: var(--text);
 }
 
 /* ===============================
-   MOBILE RESPONSIVE
+   FOOTER
+================================ */
+footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 15px;
+  background: var(--bg2);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ===============================
+   MOBILE
 ================================ */
 @media (max-width: 600px) {
   .card {
-    height: 90px;
     font-size: 14px;
   }
+}
 
-  h1 {
-    font-size: 22px;
-  }
+/* ===============================
+   FIX SEARCH BAR
+================================ */
+#searchBox {
+  display: block;
+  margin: 20px auto;
+  padding: 12px;
+  width: 60%;
+  max-width: 500px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  text-align: center;
+}
+
+/* ===============================
+   FIX STATS
+================================ */
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.stats div {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+/* ===============================
+   FIX LOGO SIZE
+================================ */
+.logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #00d4ff;
+  box-shadow: 0 0 15px rgba(0,212,255,0.5);
+}
+
+/* ===============================
+   HEADER SPACING
+================================ */
+header {
+  text-align: center;
+  padding: 20px;
+}
+
+/* Improve heading spacing */
+h3 {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Smooth hover effect for paper links */
+li a {
+  transform: scale(1);
+  transition: transform 0.2s ease;
+}
+
+li a:hover {
+  transform: scale(1.03);
+}
+
+footer {
+  margin-top: auto;
+}
+
+/* ===============================
+   FOOTER DESIGN
+================================ */
+.footer {
+  background: linear-gradient(135deg, #0b0e1a, #111827);
+  color: var(--text);
+  padding: 40px 20px;
+  position: relative;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+/* Grid layout */
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+/* Section titles */
+.footer-box h3 {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #777;
+  padding-bottom: 5px;
+}
+
+/* Text */
+.footer-box p {
+  font-size: 14px;
+  margin: 8px 0;
+  color: #ccc;
+}
+
+/* Bottom text */
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 14px;
+  color: #bbb;
+}
+
+/* Top button */
+#topBtn {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  background: orange;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+}
+
+#topBtn:hover {
+  opacity: 0.8;
 }

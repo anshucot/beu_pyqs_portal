@@ -27,20 +27,20 @@
     const sub = params.get("sub");
 
     // Title
-    document.getElementById("title").innerText =
-      `${branch.toUpperCase()} - Sem ${sem} - ${sub}`;
-
-    // 🔹 Convert subject name to folder name
+   document.getElementById("title").innerText =
+  `📘 ${sub} | ${branch.toUpperCase()} - Semester ${sem}`;
+  
+    // 🔹 Convert subject name to folder name 🔹2nd line space hatane ke kaam me aata hai be 
     function formatSubject(sub) {
       return sub.replace(/\s+/g, "");
     }
-
+// helps in storig subject name
     const subjectFolder = formatSubject(sub);
 
-    // 🔹 Base path for PDFs
+    // 🔹 Base path for PDFs(ye file ka path create karta hai)
     const basePath = `pdfs/${branch}/sem${sem}/${subjectFolder}/`;
 
-    // 🔹 Papers data
+    // 🔹 Papers data  🔹array of objects and each object contains year and file path
     const midPapers = [
       { year: 2025, file: basePath + "mid_2025.pdf" },
       { year: 2024, file: basePath + "mid_2024.pdf" },
@@ -53,23 +53,27 @@
       { year: 2023, file: basePath + "end_2023.pdf" }
     ];
 
-    // 🔹 Function to display papers
-    function displayPapers(data, elementId) {
-      const list = document.getElementById(elementId);
+    // 🔹 Function to display papers of mid and end term and element id decide where to show.
+   function displayPapers(data, elementId) {
+  const list = document.getElementById(elementId);
 
-      data.forEach(p => {
-        const li = document.createElement("li");
+  if (data.length === 0) {
+    list.innerHTML = "<p style='text-align:center;'>No papers available yet</p>";
+    return;
+  }
 
-        li.innerHTML = `
-          <a href="${p.file}" target="_blank" onclick="checkFile(event, '${p.file}')">
-            Download ${p.year} Paper
-          </a>
-        `;
+  data.forEach(p => {
+    const li = document.createElement("li");
 
-        list.appendChild(li);
-      });
-    }
+    li.innerHTML = `
+      <a href="${p.file}" target="_blank" onclick="checkFile(event, '${p.file}')">
+        📄 ${p.year} Paper
+      </a>
+    `;
 
+    list.appendChild(li);
+  });
+}
     // 🔹 Check if file exists
     function checkFile(event, filePath) {
       fetch(filePath)
@@ -79,6 +83,7 @@
             alert("Paper not available yet.");
           }
         })
+        // handle error when file is missing or not uploaded and no proper internet working
         .catch(() => {
           event.preventDefault();
           alert("Paper not available yet.");
