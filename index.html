@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BEU PYQs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <img src="logo.png" class="logo">
+  <h1>BEU PYQs Portal</h1>
+  <p>Previous Year Question Papers for B.Tech</p>
+  <button onclick="toggleMode()">🌙</button>
+</header>
+
+<input type="text" id="searchBox" placeholder="Search branch...">
+
+<div class="stats">
+  <div>120+ Papers</div>
+  <div>6 Branches</div>
+  <div>100+ Subjects</div>
+</div>
+
+<div class="container" id="branchContainer">
+  <a href="branch.html?branch=cse" class="card"><span>💻 CSE</span></a>
+  <a href="branch.html?branch=cse-iot" class="card"><span>📡 CSE IoT</span></a>
+  <a href="branch.html?branch=ee" class="card"><span>⚡ EE</span></a>
+  <a href="branch.html?branch=ce" class="card"><span>🏗️ CE</span></a>
+  <a href="branch.html?branch=me" class="card"><span>⚙️ ME</span></a>
+  <a href="branch.html?branch=vlsi" class="card"><span>📘 VLSI</span></a>
+</div>
+
+<footer class="footer">
+  <div class="footer-container">
+
+    <div class="footer-box">
+      <h3>ABOUT GROUP</h3>
+      <p>Designed to provide Question Papers, Solutions & Notes</p>
+    </div>
+
+    <div class="footer-box">
+      <h3>DISCLAIMER</h3>
+      <p>
+        We strive continuously to provide as precisely and as timely contents as possible, however, we do not guarantee the accuracy, completeness, correctness, timeliness, validity or fitness of the contents of this website.
+      </p>
+    </div>
+
+    <div class="footer-box">
+      <h3>CONTACT INFO</h3>
+      <p>PYQ Online</p>
+      <p>📧Siwan,Bihar</p>
+      <p>🌐Email id: anshuciot@gmail.com</p>
+      <p>📞Phone: 9525056552</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Anshu | All Rights Reserved</p>
+  </div>
+
+  <button onclick="scrollToTop()" id="topBtn">Top</button>
+</footer>
+
+<script>
+function toggleMode() {
+  document.body.classList.toggle("dark");
+}
+
+// Search filter
+document.getElementById("searchBox").addEventListener("keyup", function() {
+  let filter = this.value.toLowerCase();
+  let cards = document.querySelectorAll(".card");
+
+  cards.forEach(card => {
+    let text = card.innerText.toLowerCase();
+    card.style.display = text.includes(filter) ? "flex" : "none";
+  });
+});
+
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+</script>
+
+</body>
+</html>
